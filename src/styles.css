@@ -36,9 +36,6 @@ body {
 }
 
 
-
-
-
 .to-do-app {
     height: 100%;
     grid-row: 1 / 2;
@@ -76,18 +73,32 @@ body {
     
 }
 .sidebar-header {
+    font-size: 1.5rem;
     display: grid;
-    grid-template-columns: .7fr 2fr .4fr;
+    grid-template-columns: .7fr 3fr .4fr;
     color: rgba(255, 255, 255, 0.877);
-    border: 1px solid black;
+    
     align-items: center;
 }
 .prof-picture {
-    border: 1px solid rgba(255, 255, 255, 0.877);
+    
     border-radius: 50%;
     height: 35px;
     width: 35px;
+
+    background: url('./account_circle.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    fill: white;
+
 }
+
+.prof-name {
+    font-weight: 600;
+    
+}
+
 }
 
 .content-container {
@@ -127,13 +138,66 @@ body {
     padding: 0 1rem;
 }
 
-
-
-
-
 .content-header {
     
     align-self: stretch;
     height: 35px;
     
 }
+
+.name-modal {
+    
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  .modal-content {
+    color: rgba(255, 255, 255, 0.877);
+    border-radius: 15px;
+    background-color: rgb(24, 18, 43);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    min-width: 300px;
+    max-width: 600px;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  form {
+    
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 70%;
+  }
+
+  input[name="first-name"] {
+    font-size: 1.2rem;
+    border-radius: 7px;
+    padding-left: .5ch;
+  }
+
+  .modal-sub-btn {
+    align-self: flex-start;
+    padding: .5rem 2rem;
+  }
+
+  .close-btn {
+    font-size: 1rem;
+    font-weight: 600;
+    background-color:rgb(24, 18, 43);
+    color: rgba(255, 255, 255, 0.877);
+  }
+
