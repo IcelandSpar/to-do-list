@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    
+    height: 100vh;
+    
+}
+
+@media (max-width: 760px) {
+
+    .content {
+        padding: 1rem;
+        width: 100%;
+        
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
+        background-color: rgb(24, 18, 43);
+    
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: center;
+        
+    }
+    .side-bar div{
+        display: none;
+    }
+    .sidebar-header div {
+        display: none;
+    }
+
+}
+
+
+
+
+
+.to-do-app {
+    height: 100%;
+    grid-row: 1 / 2;
+    display: grid;
+    
+    grid-template-columns: 270px 1fr;
+    grid-template-rows: 1fr;
+    
+}
+
+@media (min-width: 761px) {
+
+
+.sidebar {
+    width: 270px;
+    
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    background-color: rgb(57, 48, 83);
+    padding: 1rem 1rem;
+}
+
+.content {
+    padding: 1rem;
+    width: 100%;
+    
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    background-color: rgb(24, 18, 43);
+
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.sidebar-header {
+    display: grid;
+    grid-template-columns: .7fr 2fr .4fr;
+    color: rgba(255, 255, 255, 0.877);
+    border: 1px solid black;
+    align-items: center;
+}
+.prof-picture {
+    border: 1px solid rgba(255, 255, 255, 0.877);
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+}
+}
+
+.content-container {
+    padding: 1rem;
+    color: rgba(255, 255, 255, 0.877);
+    border: solid black;
+    width: 75%;
+    max-width: 1000px;
+    min-width: 439px;
+
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.home-name {
+    border: none;
+    color: rgba(255, 255, 255, 0.877);
+    border-radius: 7px;
+    
+    background: rgb(24, 18, 43);
+    padding: 2rem 1rem;
+    width: 90%;
+    height: 1ch;
+    font-size: 3rem;
+}
+
+.home-name:focus {
+    outline: none ;
+    border: 1px solid rgba(255, 255, 255, 0.61);
+    box-shadow: 0 0 3px rgba(255, 255, 255, 0.877);
+    
+}
+
+.tasks {
+    padding: 0 1rem;
+}
+
+
+
+
+
+.content-header {
+    
+    align-self: stretch;
+    height: 35px;
+    
+}
