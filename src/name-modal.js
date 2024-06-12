@@ -1,48 +1,86 @@
+import {NameModal} from "./dom.js"
 
 
-class NameModal {
-    modalCloseBtn = document.querySelector(".close-btn");
-    nameModal = document.querySelector(".name-modal");
-    modalSubBtn = document.querySelector(".modal-sub-btn");
-    firstNameInput = document.querySelector(".first-name-input");
-    profName = document.querySelector(".prof-name");
-}
 
 const newModal = new NameModal;
 
 function getName() {
+    localStorage.setItem("user", newModal.firstNameInput.value)
     let firstName = newModal.firstNameInput.value;
     return firstName
 }
 
 function displayProfName() {
-    if(getName() == "") {
+    if(localStorage.getItem("user")) {
+        newModal.profName.textContent = localStorage.getItem("user");
+    } else if (localStorage.getItem("user") == null) {
         newModal.profName.textContent = "User";
-    } else {
-        newModal.profName.textContent = getName();
     }
     
 }
 
 export function closeBtn() {
 newModal.modalCloseBtn.addEventListener('click', function() {
-    newModal.profName.textContent = "User";
-    newModal.nameModal.style.display = "none";
+    if(localStorage.getItem("user")) {
+        newModal.nameModal.style.display = "none";
+    } else {
+        newModal.profName.textContent = "User";
+        newModal.nameModal.style.display = "none";
+    }
+    newModal.firstNameInput.style.border = "none";
 })
 }
 
+
 export function subBtn() {
     newModal.modalSubBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        getName()
-        displayProfName()
-        newModal.nameModal.style.display = "none";
+        if (newModal.firstNameInput.value == "") {
+            e.preventDefault();
+            newModal.firstNameInput.style.border = "5px solid red";
+        } else {
+            newModal.firstNameInput.style.border = "none";
+            e.preventDefault();
+            getName()
+            displayProfName()
+    
+            if(localStorage.getItem("user") == null) {
+                newModal.profName.textContent = "User"
+                newModal.nameModal.style.display = "none";
+            } else {
+                
+                newModal.nameModal.style.display = "none";
+            }
+        }
+
+       
+
+        
     })
     
 }
 
 export function modalFunctions() {
+    newModal.profName.textContent = localStorage.getItem("user");
+    checkForUserName()
     closeBtn()
     subBtn()
+    changeNameBtn()
 }
 
+export function checkForUserName() {
+    window.addEventListener("load", () => {
+        if(localStorage.getItem("user")) {
+    
+        } else {
+    
+        
+        newModal.nameModal.style.display = "block";
+    }
+    })
+    }
+
+    export function changeNameBtn() {
+        newModal.profName.addEventListener("click", function() {
+            newModal.nameModal.style.display = "block";
+        })
+    }
