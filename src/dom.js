@@ -46,7 +46,7 @@ export function MakeContent(project) {
 
         let taskTitleCont = document.createElement("div");
         taskTitleCont.classList.add(".task-title-cont")
-        taskTitleCont.style.cssText = "display: flex; gap: 1rem;"
+        taskTitleCont.style.cssText = "display: flex; gap: 1rem; align-items: center;"
         taskTitleDescCont.appendChild(taskTitleCont);
 
         let checkBox = document.createElement("input");
@@ -55,13 +55,21 @@ export function MakeContent(project) {
         taskTitleCont.appendChild(checkBox)
 
         let taskTitle = document.createElement("h2");
-        taskTitle.textContent = project.tasks[i];
+        taskTitle.textContent = project.tasks[i].taskTitle;
         taskTitleCont.appendChild(taskTitle)
+
+        let priorityText = document.createElement("div");
+        priorityText.textContent = project.tasks[i].priority;
+        taskTitleCont.appendChild(priorityText)
 
         let taskDescript = document.createElement("p");
         taskDescript.style.cssText = "line-height: 1.4; width: 100%"
         taskTitleDescCont.appendChild(taskDescript);
-        taskDescript.textContent = project.description[i];
+        taskDescript.textContent = project.tasks[i].taskDesc;
+
+        let taskDueDate = document.createElement("div");
+        taskTitleDescCont.appendChild(taskDueDate);
+        taskDueDate.textContent = `Due Date: ${project.tasks[i].dueDate}`
 
         let modifyContainer = document.createElement("div");
         modifyContainer.classList.add("modify-container");

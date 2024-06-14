@@ -10,3 +10,4 @@ import {MakeContent} from './dom.js'
 modalFunctions()
 
 MakeContent(newProj)
+console.log(newProj)
