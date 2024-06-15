@@ -112,7 +112,7 @@ body {
    
     color: rgba(255, 255, 255, 0.877);
     
-    width: 75%;
+
     max-width: 1000px;
     min-width: 439px;
 
@@ -120,6 +120,16 @@ body {
     justify-content: flex-start;
     flex-direction: column;
     
+}
+
+.inner-content {
+    color: rgba(255, 255, 255, 0.877);
+    max-width: 1000px;
+    min-width: 439px;
+    width: 75%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
 }
 
 .home-name {
@@ -202,7 +212,7 @@ body {
     
     align-self: stretch;
     height: 35px;
-
+    
     
 }
 
@@ -241,13 +251,15 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 70%;
+    width: 100%;
+    
   }
 
-  input[name="first-name"] {
-    font-size: 1.2rem;
+  input[name="first-name"], input[type="date"], input[type="text"], select, textarea {
+    font-size: 1.8rem;
     border-radius: 7px;
     padding-left: .5ch;
+    
   }
 
   .modal-sub-btn {
@@ -265,4 +277,5 @@ body {
     background-color:rgb(24, 18, 43);
     color: rgba(255, 255, 255, 0.877);
   }
+
 

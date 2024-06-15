@@ -16,7 +16,7 @@ export function Task(taskTitle, taskDesc, dueDate, completed, priority, notes) {
     this.notes = notes;
 }
 
-
+let projectsStored = [];
 
 
 

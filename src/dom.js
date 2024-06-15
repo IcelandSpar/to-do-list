@@ -1,4 +1,4 @@
-import {newProj} from './projects.js'
+import {newProj, Task} from './projects.js'
 
 export class NameModal {
     modalCloseBtn = document.querySelector(".close-btn");
@@ -13,11 +13,12 @@ class ProjectsClasses {
     homeName = document.querySelector(".home-name");
     tasks = document.querySelector(".tasks");
     taskInfoContainer = document.querySelector(".task-info-container");
+    addTaskButton = document.querySelector(".add-task-btn")
 
 
 }
 
-const classes = new ProjectsClasses;
+export const classes = new ProjectsClasses;
 
 export function MakeContent(project) {
         classes.contentContainer.textContent = ""
@@ -43,7 +44,7 @@ export function MakeContent(project) {
     for(let i = 0; i < project.tasks.length; i++) {
         let task = document.createElement("div");
         classes.contentContainer.appendChild(task);
-        task.classList.add("tasks")
+        task.classList.add("tasks", `task${i}`)
 
 
         
@@ -75,6 +76,14 @@ export function MakeContent(project) {
         priorityText.textContent = project.tasks[i].priority;
         taskTitleCont.appendChild(priorityText)
 
+        if (project.tasks[i].priority == "Urgent") {
+            priorityText.style.cssText = "color: red;"
+        } else if (project.tasks[i].priority == "Important") {
+            priorityText.style.cssText = "color: yellow;"
+        } else if (project.tasks[i].priority == "Not Important") {
+            priorityText.style.cssText = "color: green;"
+        }
+
         let taskDescript = document.createElement("p");
         taskDescript.style.cssText = "line-height: 1.4; width: 100%"
         taskTitleDescCont.appendChild(taskDescript);
@@ -96,14 +105,105 @@ export function MakeContent(project) {
         let deleteDiv = document.createElement("div");
         deleteDiv.textContent = "Delete";
         modifyContainer.appendChild(deleteDiv);
+
+        deleteDiv.addEventListener('click', function() {
+            project.tasks.splice(i, 1);
+            
+            MakeContent(project)
+
+
+        })
     }
 }
 
-    let addTaskBtn = document.createElement("button");
-    addTaskBtn.classList.add("add-task-btn")
-    addTaskBtn.textContent = "+ Add Task";
-    classes.contentContainer.appendChild(addTaskBtn)
+
 
 }
 
+export function addTaskModal(project) {
+    let modalBackground = document.createElement("div");
+    
+    modalBackground.style.cssText = "position: fixed; z-index: 1; left: 0;  top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4);"
+    document.body.appendChild(modalBackground);
 
+    let modalCont = document.createElement("div");
+    modalCont.style.cssText = "margin: auto; display: flex; border: 1px solid #888; color: white; min-width: 500px; max-width: 800px; width: 70%; margin-top: 5rem; background-color: rgb(24, 18, 43); padding: 20px; justify-content: space-between; align-items: flex-start; font-size: 1.8rem; border-radius: 15px;"
+
+    let form = document.createElement("form");
+    let addTitleLabel = document.createElement("label");
+    let addTitleInput = document.createElement("input");
+    let exitBtn = document.createElement("button");
+    let addTaskDescLabel = document.createElement("label");
+    let addTaskDescInput = document.createElement("textarea");
+    let addTaskDueDateLabel = document.createElement("label");
+    let addTaskDueDateInput = document.createElement("input");
+    let addPriorityLabel = document.createElement("label");
+
+    let addPriorityInput = document.createElement("select");
+    let prioritySelect1 = document.createElement("option");
+    let prioritySelect2 = document.createElement("option");
+    let prioritySelect3 = document.createElement("option");
+
+    let addTaskSubmit = document.createElement("button");
+
+    addTitleLabel.setAttribute("for", "taskTitle");
+    addTitleInput.setAttribute("name", "tasTitle");
+
+    addTaskDueDateInput.setAttribute("type", "date");
+    addTitleInput.setAttribute("type", "text");
+    addTaskDescInput.setAttribute("type", "text");
+    addTaskDescInput.style.cssText = "height: 300px; resize: vertical"
+    
+    
+
+
+    exitBtn.textContent = "X";
+    exitBtn.style.cssText = "padding: .2rem; background-color: rgb(24, 18, 43); color: white; font-weight: 600; cursor: pointer;"
+    addTitleLabel.textContent = "Task Title:"
+
+    modalBackground.appendChild(modalCont);
+    modalCont.appendChild(form);
+    modalCont.appendChild(exitBtn);
+
+    form.appendChild(addTitleLabel);
+    form.appendChild(addTitleInput);
+
+    addTaskDescLabel.textContent = "Task Description:"
+    form.appendChild(addTaskDescLabel);
+    form.appendChild(addTaskDescInput);
+
+    addTaskDueDateLabel.textContent = "Due Date:";
+    form.appendChild(addTaskDueDateLabel);
+    form.appendChild(addTaskDueDateInput);
+
+    addPriorityLabel.textContent = "Priority:";
+    prioritySelect1.textContent = "Not Important";
+    prioritySelect2.textContent = "Important";
+    prioritySelect3.textContent = "Urgent";
+
+    form.appendChild(addPriorityLabel);
+    form.appendChild(addPriorityInput);
+    addPriorityInput.appendChild(prioritySelect1);
+    addPriorityInput.appendChild(prioritySelect2);
+    addPriorityInput.appendChild(prioritySelect3);
+
+    addTaskSubmit.textContent = "+ Add Task";
+    addTaskSubmit.style.cssText = "align-self: flex-start; padding: .5rem 1.5rem; font-weight: 600; cursor: pointer; border-radius: 15px;"
+    form.appendChild(addTaskSubmit);
+
+    addTaskSubmit.addEventListener('click', function(e) {
+        e.preventDefault()
+        modalBackground.style.display = "none";
+        let addingTask = new Task(addTitleInput.value, addTaskDescInput.value, addTaskDueDateInput.value, false, addPriorityInput.value, "")
+        project.tasks.push(addingTask)
+        MakeContent(project)
+        
+    })
+
+    exitBtn.addEventListener('click', function(e) {
+        e.preventDefault()
+        modalBackground.style.display = "none";
+    })
+
+
+}
