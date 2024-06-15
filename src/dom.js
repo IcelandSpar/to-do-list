@@ -30,15 +30,28 @@ export function MakeContent(project) {
 
     classes.contentContainer.appendChild(projTitle);
 
+    if (project.tasks.length == 0) {
+        let noTasks = document.createElement("h3")
+        noTasks.textContent = "Looks like there are no tasks...";
+        noTasks.style.cssText = "margin-left: .5rem; margin-top: 1rem;"
+        classes.contentContainer.appendChild(noTasks);
+        
+    } else {
+
+    
 
     for(let i = 0; i < project.tasks.length; i++) {
         let task = document.createElement("div");
         classes.contentContainer.appendChild(task);
         task.classList.add("tasks")
+
+
         
         let taskInfoCont = document.createElement("div");
         taskInfoCont.classList.add("class-info-container")
         task.appendChild(taskInfoCont);
+
+
         
         let taskTitleDescCont = document.createElement("div");
         taskInfoCont.appendChild(taskTitleDescCont);
@@ -84,6 +97,7 @@ export function MakeContent(project) {
         deleteDiv.textContent = "Delete";
         modifyContainer.appendChild(deleteDiv);
     }
+}
 
     let addTaskBtn = document.createElement("button");
     addTaskBtn.classList.add("add-task-btn")

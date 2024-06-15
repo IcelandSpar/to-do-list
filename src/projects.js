@@ -1,13 +1,13 @@
 import NameModal from './name-modal.js';
 
-function MakeNewProj(projName, tasks) {
+export function MakeNewProj(projName, tasks) {
     this.projName = projName;
-    this.tasks = [tasks];
+    this.tasks = [];
     
 
 }
 
-function Task(taskTitle, taskDesc, dueDate, completed, priority, notes) {
+export function Task(taskTitle, taskDesc, dueDate, completed, priority, notes) {
     this.taskTitle = taskTitle;
     this.taskDesc = taskDesc;
     this.dueDate = dueDate;
@@ -15,8 +15,7 @@ function Task(taskTitle, taskDesc, dueDate, completed, priority, notes) {
     this.priority = priority;
     this.notes = notes;
 }
-const newTask = new Task("My title", "My Desc", "12-10-2024", false, "Important", "My Notes")
-export const newProj = new MakeNewProj("My Project", newTask)
+
 
 
 
