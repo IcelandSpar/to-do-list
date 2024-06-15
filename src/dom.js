@@ -60,7 +60,7 @@ export function MakeContent(project) {
 
         let taskTitleCont = document.createElement("div");
         taskTitleCont.classList.add(".task-title-cont")
-        taskTitleCont.style.cssText = "display: flex; gap: 1rem; align-items: center;"
+        taskTitleCont.style.cssText = "display: flex; align-items: center; width: fit-content"
         taskTitleDescCont.appendChild(taskTitleCont);
 
         let checkBox = document.createElement("input");
@@ -68,20 +68,31 @@ export function MakeContent(project) {
         checkBox.style.cssText = "margin-left: -2rem;"
         taskTitleCont.appendChild(checkBox)
 
+        if(project.tasks[i].completed) {
+            checkBox.setAttribute("checked", "true")
+        }
+
+        checkBox.addEventListener('change', function() {
+        project.tasks[i].completed = checkBox.checked
+        console.log(project.tasks[i].completed)
+        console.log(project.tasks[i])
+        })
+
         let taskTitle = document.createElement("h2");
         taskTitle.textContent = project.tasks[i].taskTitle;
+        taskTitle.style.cssText = "display: inline-block; width: fit-content; margin-left: 1rem;"
         taskTitleCont.appendChild(taskTitle)
 
-        let priorityText = document.createElement("div");
+        let priorityText = document.createElement("h2");
         priorityText.textContent = project.tasks[i].priority;
         taskTitleCont.appendChild(priorityText)
 
         if (project.tasks[i].priority == "Urgent") {
-            priorityText.style.cssText = "color: red;"
+            priorityText.style.cssText = "color: red; margin-left: .5rem; opacity: 0.77;"
         } else if (project.tasks[i].priority == "Important") {
-            priorityText.style.cssText = "color: yellow;"
+            priorityText.style.cssText = "color: yellow; margin-left: .5rem; opacity: 0.77;"
         } else if (project.tasks[i].priority == "Not Important") {
-            priorityText.style.cssText = "color: green;"
+            priorityText.style.cssText = "color: green; margin-left: .5rem; opacity: 0.77"
         }
 
         let taskDescript = document.createElement("p");

@@ -7,7 +7,7 @@ export function MakeNewProj(projName, tasks) {
 
 }
 
-export function Task(taskTitle, taskDesc, dueDate, completed, priority, notes) {
+export function Task(taskTitle, taskDesc, dueDate, completed = false, priority, notes) {
     this.taskTitle = taskTitle;
     this.taskDesc = taskDesc;
     this.dueDate = dueDate;
