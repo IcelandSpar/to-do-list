@@ -56,11 +56,11 @@ export function MakeContent(project) {
         
         let taskTitleDescCont = document.createElement("div");
         taskInfoCont.appendChild(taskTitleDescCont);
-        taskTitleDescCont.style.cssText = "display: flex; flex-direction: column; gap: 1rem;"
+        taskTitleDescCont.style.cssText = "display: flex; flex-direction: column; gap: 1rem;  margin-right: 1rem; width: 90%"
 
         let taskTitleCont = document.createElement("div");
         taskTitleCont.classList.add(".task-title-cont")
-        taskTitleCont.style.cssText = "display: flex; align-items: center; width: fit-content"
+        taskTitleCont.style.cssText = "display: flex; align-items: baseline;"
         taskTitleDescCont.appendChild(taskTitleCont);
 
         let checkBox = document.createElement("input");
@@ -78,21 +78,21 @@ export function MakeContent(project) {
         console.log(project.tasks[i])
         })
 
-        let taskTitle = document.createElement("h2");
+        let taskTitle = document.createElement("p");
         taskTitle.textContent = project.tasks[i].taskTitle;
-        taskTitle.style.cssText = "display: inline-block; width: fit-content; margin-left: 1rem;"
+        taskTitle.style.cssText = "display: inline; width: fit-content; margin-left: 1rem; font-size: 1.5rem;"
         taskTitleCont.appendChild(taskTitle)
 
-        let priorityText = document.createElement("h2");
+        let priorityText = document.createElement("p");
         priorityText.textContent = project.tasks[i].priority;
         taskTitleCont.appendChild(priorityText)
 
         if (project.tasks[i].priority == "Urgent") {
-            priorityText.style.cssText = "color: red; margin-left: .5rem; opacity: 0.77;"
+            priorityText.style.cssText = "display: inline; color: red; margin-left: .5rem; opacity: 0.77; font-size: 1rem;"
         } else if (project.tasks[i].priority == "Important") {
-            priorityText.style.cssText = "color: yellow; margin-left: .5rem; opacity: 0.77;"
+            priorityText.style.cssText = "color: yellow; margin-left: .5rem; opacity: 0.77; font-size: 1rem;"
         } else if (project.tasks[i].priority == "Not Important") {
-            priorityText.style.cssText = "color: green; margin-left: .5rem; opacity: 0.77"
+            priorityText.style.cssText = "color: green; margin-left: .5rem; opacity: 0.77; font-size: 1rem;"
         }
 
         let taskDescript = document.createElement("p");
@@ -106,7 +106,7 @@ export function MakeContent(project) {
 
         let modifyContainer = document.createElement("div");
         modifyContainer.classList.add("modify-container");
-        modifyContainer.style.cssText = "display: flex; gap: 1rem; "
+        
         task.appendChild(modifyContainer);
 
         let editDiv = document.createElement("div");
@@ -163,7 +163,7 @@ export function addTaskModal(project) {
     addTaskDueDateInput.setAttribute("type", "date");
     addTitleInput.setAttribute("type", "text");
     addTaskDescInput.setAttribute("type", "text");
-    addTaskDescInput.style.cssText = "height: 300px; resize: vertical"
+    addTaskDescInput.style.cssText = "height: 100px; resize: vertical; padding: .5rem 0"
     
     
 
