@@ -1,4 +1,5 @@
 import NameModal from './name-modal.js';
+import {} from './home.js';
 
 export function MakeNewProj(projName, tasks) {
     this.projName = projName;
@@ -16,7 +17,9 @@ export function Task(taskTitle, taskDesc, dueDate, completed = false, priority, 
     this.notes = notes;
 }
 
-let projectsStored = [];
+
+
+
 
 
 

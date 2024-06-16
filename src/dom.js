@@ -1,4 +1,6 @@
-import {newProj, Task} from './projects.js'
+import {Task} from './projects.js';
+import {projectsStored} from './local-storage.js';
+import {checkForLocalStorage } from './index.js';
 
 export class NameModal {
     modalCloseBtn = document.querySelector(".close-btn");
@@ -73,7 +75,8 @@ export function MakeContent(project) {
         }
 
         checkBox.addEventListener('change', function() {
-        project.tasks[i].completed = checkBox.checked
+        project.tasks[i].completed = checkBox.checked;
+        localStorage.setItem("home", JSON.stringify(project))
         console.log(project.tasks[i].completed)
         console.log(project.tasks[i])
         })
@@ -119,7 +122,7 @@ export function MakeContent(project) {
 
         deleteDiv.addEventListener('click', function() {
             project.tasks.splice(i, 1);
-            
+            localStorage.setItem("home", JSON.stringify(project))
             MakeContent(project)
 
 
@@ -163,7 +166,7 @@ export function addTaskModal(project) {
     addTaskDueDateInput.setAttribute("type", "date");
     addTitleInput.setAttribute("type", "text");
     addTaskDescInput.setAttribute("type", "text");
-    addTaskDescInput.style.cssText = "height: 100px; resize: vertical; padding: .5rem 0"
+    addTaskDescInput.style.cssText = "height: 100px; resize: vertical; padding: .5rem .5rem"
     
     
 
@@ -208,7 +211,7 @@ export function addTaskModal(project) {
         let addingTask = new Task(addTitleInput.value, addTaskDescInput.value, addTaskDueDateInput.value, false, addPriorityInput.value, "")
         project.tasks.push(addingTask)
         MakeContent(project)
-        
+        localStorage.setItem("home", JSON.stringify(project))
     })
 
     exitBtn.addEventListener('click', function(e) {
