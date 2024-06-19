@@ -17,14 +17,16 @@ export function checkForLocalStorage(project) {
 
 if (JSON.parse(localStorage.getItem("home"))) {
     MakeContent(JSON.parse(localStorage.getItem("home")))
+    addTask(JSON.parse(localStorage.getItem("home")))
 } else {
     MakeContent(project)
+    addTask(project)
 }
 
 }
 checkForLocalStorage(newProj)
 
-addTask(newProj)
+
 
 
 

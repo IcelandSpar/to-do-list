@@ -16,7 +16,7 @@ class ProjectsClasses {
     tasks = document.querySelector(".tasks");
     taskInfoContainer = document.querySelector(".task-info-container");
     addTaskButton = document.querySelector(".add-task-btn")
-
+    
 
 }
 
@@ -114,7 +114,12 @@ export function MakeContent(project) {
 
         let editDiv = document.createElement("div");
         editDiv.textContent = "Edit";
-        modifyContainer.appendChild(editDiv)
+        modifyContainer.appendChild(editDiv);
+
+        editDiv.addEventListener('click', function() {
+            editTaskModal(project, i)
+            
+        })
 
         let deleteDiv = document.createElement("div");
         deleteDiv.textContent = "Delete";
@@ -161,7 +166,7 @@ export function addTaskModal(project) {
     let addTaskSubmit = document.createElement("button");
 
     addTitleLabel.setAttribute("for", "taskTitle");
-    addTitleInput.setAttribute("name", "tasTitle");
+    addTitleInput.setAttribute("name", "taskTitle");
 
     addTaskDueDateInput.setAttribute("type", "date");
     addTitleInput.setAttribute("type", "text");
@@ -209,10 +214,111 @@ export function addTaskModal(project) {
         e.preventDefault()
         modalBackground.style.display = "none";
         let addingTask = new Task(addTitleInput.value, addTaskDescInput.value, addTaskDueDateInput.value, false, addPriorityInput.value, "")
+        
         project.tasks.push(addingTask)
         MakeContent(project)
         localStorage.setItem("home", JSON.stringify(project))
+        
+        
     })
+
+    exitBtn.addEventListener('click', function(e) {
+        e.preventDefault()
+        modalBackground.style.display = "none";
+    })
+
+
+}
+
+
+export function editTaskModal(project, iterable) {
+    let modalBackground = document.createElement("div");
+    
+    modalBackground.style.cssText = "position: fixed; z-index: 1; left: 0;  top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4);"
+    document.body.appendChild(modalBackground);
+
+    let modalCont = document.createElement("div");
+    modalCont.style.cssText = "margin: auto; display: flex; border: 1px solid #888; color: white; min-width: 500px; max-width: 800px; width: 70%; margin-top: 5rem; background-color: rgb(24, 18, 43); padding: 20px; justify-content: space-between; align-items: flex-start; font-size: 1.8rem; border-radius: 15px;"
+
+    let form = document.createElement("form");
+    let editTitleLabel = document.createElement("label");
+    let editTitleInput = document.createElement("input");
+    let exitBtn = document.createElement("button");
+    let editTaskDescLabel = document.createElement("label");
+    let editTaskDescInput = document.createElement("textarea");
+    let editTaskDueDateLabel = document.createElement("label");
+    let editTaskDueDateInput = document.createElement("input");
+    let editPriorityLabel = document.createElement("label");
+
+    let editPriorityInput = document.createElement("select");
+    let prioritySelect1 = document.createElement("option");
+    let prioritySelect2 = document.createElement("option");
+    let prioritySelect3 = document.createElement("option");
+
+    let editTaskSubmit = document.createElement("button");
+
+    editTitleLabel.setAttribute("for", "taskTitle");
+    editTitleInput.setAttribute("name", "taskTitle");
+    editTitleInput.setAttribute("value", `${project.tasks[iterable].taskTitle}`);
+
+    editTaskDueDateInput.setAttribute("type", "date");
+    editTaskDueDateInput.value = project.tasks[iterable].dueDate;
+    editTitleInput.setAttribute("type", "text");
+    editTaskDescInput.setAttribute("type", "text");
+    editTaskDescInput.style.cssText = "height: 100px; resize: vertical; padding: .5rem .5rem"
+    editTaskDescInput.value = project.tasks[iterable].taskDesc;
+    
+
+
+
+
+
+
+    exitBtn.textContent = "X";
+    exitBtn.style.cssText = "padding: .2rem; background-color: rgb(24, 18, 43); color: white; font-weight: 600; cursor: pointer;"
+    editTitleLabel.textContent = "Task Title:"
+
+    modalBackground.appendChild(modalCont);
+    modalCont.appendChild(form);
+    modalCont.appendChild(exitBtn);
+
+    form.appendChild(editTitleLabel);
+    form.appendChild(editTitleInput);
+
+    editTaskDescLabel.textContent = "Task Description:"
+    form.appendChild(editTaskDescLabel);
+    form.appendChild(editTaskDescInput);
+
+    editTaskDueDateLabel.textContent = "Due Date:";
+    form.appendChild(editTaskDueDateLabel);
+    form.appendChild(editTaskDueDateInput);
+
+    editPriorityLabel.textContent = "Priority:";
+    prioritySelect1.textContent = "Not Important";
+    prioritySelect2.textContent = "Important";
+    prioritySelect3.textContent = "Urgent";
+
+    form.appendChild(editPriorityLabel);
+    form.appendChild(editPriorityInput);
+    editPriorityInput.appendChild(prioritySelect1);
+    editPriorityInput.appendChild(prioritySelect2);
+    editPriorityInput.appendChild(prioritySelect3);
+
+    editTaskSubmit.textContent = "Edit Task";
+    editTaskSubmit.style.cssText = "align-self: flex-start; padding: .5rem 1.5rem; font-weight: 600; cursor: pointer; border-radius: 15px;"
+    form.appendChild(editTaskSubmit);
+
+    editTaskSubmit.addEventListener('click', function(e) {
+        e.preventDefault()
+        modalBackground.style.display = "none";
+        let addingTask = new Task(editTitleInput.value, editTaskDescInput.value, editTaskDueDateInput.value, false, editPriorityInput.value, "")
+        project.tasks.splice(iterable, 1, addingTask);
+        
+        localStorage.setItem("home", JSON.stringify(project))
+        MakeContent(project)
+    })
+
+
 
     exitBtn.addEventListener('click', function(e) {
         e.preventDefault()
