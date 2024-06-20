@@ -113,8 +113,11 @@ export function MakeContent(project) {
         task.appendChild(modifyContainer);
 
         let editDiv = document.createElement("div");
-        editDiv.textContent = "Edit";
+        
+        let editImg = document.createElement("img");
         modifyContainer.appendChild(editDiv);
+        editDiv.appendChild(editImg);
+        editImg.classList.add('edit-icon');
 
         editDiv.addEventListener('click', function() {
             editTaskModal(project, i)
@@ -122,8 +125,11 @@ export function MakeContent(project) {
         })
 
         let deleteDiv = document.createElement("div");
-        deleteDiv.textContent = "Delete";
+        let deleteImg = document.createElement("img");
+        deleteImg.classList.add('delete-icon');
+        
         modifyContainer.appendChild(deleteDiv);
+        deleteDiv.appendChild(deleteImg);
 
         deleteDiv.addEventListener('click', function() {
             project.tasks.splice(i, 1);

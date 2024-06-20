@@ -194,8 +194,34 @@ body {
         gap: .5rem;
     }
 }
+.edit-icon {
+    background: url('./edit.svg');
+        
+    
+    height: 1.5rem;
+    width: 1.5rem;
+    
+    
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    
+}
 
-.modify-container div:hover {
+
+.delete-icon {
+    background: url('./delete.svg');
+        
+    
+    height: 1.5rem;
+    width: 1.5rem;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    outline: 0;
+}
+.modify-container img:hover {
     background-color: rgb(57, 48, 83);
     
 }
